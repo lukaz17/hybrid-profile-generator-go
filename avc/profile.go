@@ -19,10 +19,12 @@ const (
 
 // EncodeProfile contains minimum parameters for encoding video in AVC.
 type EncodeProfile struct {
-	Width      uint16
-	Height     uint16
-	FrameRate  float64
-	RateFactor RateFactor
+	Name        string
+	Width       uint16
+	Height      uint16
+	FrameRate   float64
+	RateFactor  RateFactor
+	ThreadCount uint8
 }
 
 // AVCProfile contains all constraints of an AVC Level.
@@ -44,9 +46,8 @@ func MinLevel(width, height uint16, framerate float64) uint8 {
 	for _, profile := range profiles {
 		if profile.MacroBlockMax >= requiredMacroBlocks {
 			level = profile.Level
-			continue
+			break
 		}
-		break
 	}
 	return level
 }

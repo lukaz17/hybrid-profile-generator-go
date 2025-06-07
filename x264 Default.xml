@@ -2,7 +2,7 @@
  <HybridData name="adaptiveBFrameDecision" value="optimal"/>
  <HybridData name="adaptiveDctCalculation" value="true"/>
  <HybridData name="adaptiveQuantization" value="manual"/>
- <HybridData name="adaptiveQuantizationStrength" value="1"/>
+ <HybridData name="adaptiveQuantizationStrength" value="{{printf "%2.1f" .AQStrength}}"/>
  <HybridData name="adjustGOPSizeToOutputFPS" value="false"/>
  <HybridData name="adjustVUIColorMatrixToInput" value="true"/>
  <HybridData name="adjustVUIColorPrimesToInput" value="true"/>
@@ -14,7 +14,7 @@
  <HybridData name="aud" value="false"/>
  <HybridData name="autoBitdepth" value="true"/>
  <HybridData name="autoOutputColor" value="true"/>
- <HybridData name="avcLevel" value="unrestricted"/>
+ <HybridData name="avcLevel" value="{{printf "%2.1f" .AVCLevel}}"/>
  <HybridData name="avcProfile" value="High"/>
  <HybridData name="avcProfileAndLevel" value="true"/>
  <HybridData name="b8x8" value="true"/>
@@ -31,9 +31,9 @@
  <HybridData name="chromaQpModifier" value="-3"/>
  <HybridData name="commandLineAddition"/>
  <HybridData name="constrainIntra" value="false"/>
- <HybridData name="cpuCount" value="32"/>
+ <HybridData name="cpuCount" value="16"/>
  <HybridData name="createQpFile" value="true"/>
- <HybridData name="crfMax" value="18.1"/>
+ <HybridData name="crfMax" value="{{.RateFactorMax}}"/>
  <HybridData name="curveCompression" value="0.6"/>
  <HybridData name="customQuantizerMatrix"/>
  <HybridData name="datarateFluctuation" value="2"/>
@@ -54,7 +54,7 @@
  <HybridData name="forceCfr" value="false"/>
  <HybridData name="fullPixelPrecision" value="multi-hexagonal"/>
  <HybridData name="generalFrameSettings" value="true"/>
- <HybridData name="gopMaximum" value="250"/>
+ <HybridData name="gopMaximum" value="{{.KeyInterval}}"/>
  <HybridData name="gopMinimum" value="0"/>
  <HybridData name="gopSize" value="true"/>
  <HybridData name="hardwareRestriction" value="false"/>
@@ -73,8 +73,8 @@
  <HybridData name="lookaheadThreadsMode" value="auto"/>
  <HybridData name="lossless" value="false"/>
  <HybridData name="macroblockSettings" value="true"/>
- <HybridData name="maxBFrames" value="8"/>
- <HybridData name="maxReferences" value="3"/>
+ <HybridData name="maxBFrames" value="{{.BFrame}}"/>
+ <HybridData name="maxReferences" value="{{.RefFrame}}"/>
  <HybridData name="mbTree" value="activated"/>
  <HybridData name="mediumRestriction" value="false"/>
  <HybridData name="mediumRestrictionForBlurayAVCHD" value="true"/>
@@ -83,7 +83,7 @@
  <HybridData name="minimizeAvcLevel" value="false"/>
  <HybridData name="minimizeLevelForMBPSAndBitrate" value="false"/>
  <HybridData name="mixedReferences" value="true"/>
- <HybridData name="motionEstimationRange" value="32"/>
+ <HybridData name="motionEstimationRange" value="{{.MeRange}}"/>
  <HybridData name="motionEstimationSettings" value="true"/>
  <HybridData name="motionVectorRange" value="automatic"/>
  <HybridData name="nalhrd" value="none"/>
@@ -117,8 +117,8 @@
  <HybridData name="quantizerMinimum" value="0"/>
  <HybridData name="quantizerSmoothing" value="true"/>
  <HybridData name="rateControlSettings" value="true"/>
- <HybridData name="rateFactor" value="17"/>
- <HybridData name="rcLookahead" value="60"/>
+ <HybridData name="rateFactor" value="{{.RateFactor}}"/>
+ <HybridData name="rcLookahead" value="{{.RCLookahead}}"/>
  <HybridData name="resetToPresetBefore" value="true"/>
  <HybridData name="restrictCRF" value="false"/>
  <HybridData name="sceneChange" value="40"/>
@@ -139,7 +139,7 @@
  <HybridData name="stereoscopic" value="false"/>
  <HybridData name="stereoscopicValue" value="none"/>
  <HybridData name="stitchable" value="false"/>
- <HybridData name="syncLookahead" value="60"/>
+ <HybridData name="syncLookahead" value="{{.InputLookahead}}"/>
  <HybridData name="synclookaheadMode" value="manual"/>
  <HybridData name="targetSize" value="700"/>
  <HybridData name="targetSizeMode" value="custom"/>
