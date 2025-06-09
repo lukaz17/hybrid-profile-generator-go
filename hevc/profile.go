@@ -12,8 +12,8 @@ var profiles []*HEVCProfile
 type RateFactor float64
 
 const (
-	LowQuality    RateFactor = 27
-	MediumQuality RateFactor = 22
+	LowQuality    RateFactor = 25.5
+	MediumQuality RateFactor = 21
 	HighQuality   RateFactor = 17
 )
 

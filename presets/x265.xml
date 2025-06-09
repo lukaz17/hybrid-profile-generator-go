@@ -4,7 +4,7 @@
  <HybridData name="adjustGOPSizeToOutputFPS" value="false"/>
  <HybridData name="adjustVUIColorMatrixToInput" value="true"/>
  <HybridData name="adjustVUIColorPrimesToInput" value="true"/>
- <HybridData name="adjustVUIColorRangeToInput" value="false"/>
+ <HybridData name="adjustVUIColorRangeToInput" value="true"/>
  <HybridData name="adjustVUIColorTransferToInput" value="true"/>
  <HybridData name="allowNonConformanceForLevelNone" value="false"/>
  <HybridData name="analysisFile"/>
@@ -31,7 +31,7 @@
  <HybridData name="complexityBlur" value="20"/>
  <HybridData name="constVBV" value="false"/>
  <HybridData name="constrainedIntraPrediction" value="false"/>
- <HybridData name="cpuCount" value="16"/>
+ <HybridData name="cpuCount" value="1"/>
  <HybridData name="createQpFile" value="true"/>
  <HybridData name="cuLossless" value="false"/>
  <HybridData name="cuTree" value="true"/>
@@ -58,7 +58,7 @@
  <HybridData name="hdrOpt" value="false"/>
  <HybridData name="hevcAQ" value="false"/>
  <HybridData name="hevcLevel" value="{{printf "%2.1f" .HEVCLevel}}"/>
- <HybridData name="hevcProfile" value="Main 10"/>
+ <HybridData name="hevcProfile" value="Main"/>
  <HybridData name="hevcTier" value="{{.HEVCTier}}"/>
  <HybridData name="hierarchicalME" value="false"/>
  <HybridData name="histogramSceneCut" value="0.01"/>
@@ -75,15 +75,15 @@
  <HybridData name="infoSEI" value="true"/>
  <HybridData name="interlaced" value="false"/>
  <HybridData name="interlacedInput" value="false"/>
- <HybridData name="internalBitDepth" value="16-bit"/>
+ <HybridData name="internalBitDepth" value="8-bit"/>
  <HybridData name="intraRefresh" value="false"/>
  <HybridData name="intraSmoothing" value="true"/>
  <HybridData name="ipFactor" value="1.4"/>
  <HybridData name="lightFromInput" value="true"/>
- <HybridData name="limitModes" value="false"/>
+ <HybridData name="limitModes" value="true"/>
  <HybridData name="limitSAO" value="false"/>
- <HybridData name="limitTU" value="0"/>
- <HybridData name="limitrefs" value="no limit"/>
+ <HybridData name="limitTU" value="4"/>
+ <HybridData name="limitrefs" value="limit reference depth"/>
  <HybridData name="lookahead" value="{{.RCLookahead}}"/>
  <HybridData name="lookaheadSlices" value="0"/>
  <HybridData name="lookaheadthreads" value="0"/>
@@ -127,7 +127,7 @@
  <HybridData name="parallelMotionEstimation" value="false"/>
  <HybridData name="pbFactor" value="1.3"/>
  <HybridData name="picStruct" value="(progressive) Frame"/>
- <HybridData name="pools" value="0"/>
+ <HybridData name="pools" value="1"/>
  <HybridData name="preferBitrate" value="true"/>
  <HybridData name="preferTargetSize" value="false"/>
  <HybridData name="psyRDO" value="2"/>
@@ -143,7 +143,7 @@
  <HybridData name="quantizerStep" value="4"/>
  <HybridData name="radlCount" value="0"/>
  <HybridData name="rateDo" value="6: atm. same as 5"/>
- <HybridData name="rateFactor" value="{{.RateFactor}}"/>
+ <HybridData name="rateFactor" value="{{printf "%2.1f" .RateFactor}}"/>
  <HybridData name="rateFactorMax" value="0"/>
  <HybridData name="rateFactorMin" value="0"/>
  <HybridData name="rcGrain" value="false"/>
@@ -201,7 +201,7 @@
  <HybridData name="videoFramecount" value="0"/>
  <HybridData name="vuiChromaLocation" value="false"/>
  <HybridData name="vuiChromaLocationValue" value="0"/>
- <HybridData name="vuiColorMatrix" value="false"/>
+ <HybridData name="vuiColorMatrix" value="true"/>
  <HybridData name="vuiColorMatrixValue" value="smpte170m"/>
  <HybridData name="vuiColorPrimes" value="false"/>
  <HybridData name="vuiColorPrimesValue" value="unknown"/>
@@ -209,7 +209,7 @@
  <HybridData name="vuiOverscan" value="false"/>
  <HybridData name="vuiOverscanValue" value="unknown"/>
  <HybridData name="vuiRange" value="true"/>
- <HybridData name="vuiRangeValue" value="full"/>
+ <HybridData name="vuiRangeValue" value="limited"/>
  <HybridData name="vuiTransfer" value="false"/>
  <HybridData name="vuiTransferValue" value="unknown"/>
  <HybridData name="vuiVideoFormat" value="false"/>

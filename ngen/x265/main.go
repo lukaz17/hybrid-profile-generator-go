@@ -77,7 +77,7 @@ func main() {
 		}
 	}
 
-	defaultProfile, err := ioutil.ReadFile("./presets/x264.xml")
+	defaultProfile, err := ioutil.ReadFile("./presets/x265.xml")
 	if err != nil {
 		logger.Error(err, "failed to read template file")
 	}
@@ -119,7 +119,7 @@ func createSetting(profile *hevc.EncodeProfile) *EncodeParams {
 	params.MeRange = meRange
 	params.BFrame = bFrame
 	params.KeyInterval = uint16(math.Ceil(profile.FrameRate) * 10)
-	params.RCLookahead = mathxt.MinUint16(params.KeyInterval, 250)
+	params.RCLookahead = mathxt.MinUint16(uint16(math.Ceil(profile.FrameRate)*2), 120)
 	params.AQStrength = aqStrength + aqStrengthModifier
 	return params
 }
@@ -174,11 +174,11 @@ func factorsByRateFactor(quality hevc.RateFactor, frameRate float64) (refFrame, 
 
 	if float64(quality) <= float64(17) {
 		refFrame += 2
-		bFrame = uint8(16)
+		bFrame = uint8(12)
 		aqStrengthModifier = float64(0)
 	} else if float64(quality) <= float64(22) {
 		refFrame += 1
-		bFrame = uint8(12)
+		bFrame = uint8(10)
 		aqStrengthModifier = float64(0.05)
 	} else {
 		refFrame += 0
