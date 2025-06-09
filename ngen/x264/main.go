@@ -30,7 +30,6 @@ type EncodeParams struct {
 	FrameRate      float64
 	ThreadCount    uint8
 	RateFactor     float64
-	RateFactorMax  float64
 	AVCLevel       float64
 	RefFrame       uint8
 	MeRange        uint8
@@ -118,14 +117,13 @@ func createSetting(profile *avc.EncodeProfile) *EncodeParams {
 	meRange, aqStrength := factorsByResolution(profile.Width)
 	refFrame, bFrame, aqStrengthModifier := factorsByRateFactor(profile.RateFactor, profile.FrameRate)
 
-	params.RateFactorMax = float64(profile.RateFactor) - 4
 	params.AVCLevel = float64(level) / 10
 	params.RefFrame = mathxt.MinUint8(x264Profile.RefFrameMax, refFrame)
 	params.MeRange = meRange
 	params.BFrame = bFrame
 	params.KeyInterval = uint16(math.Ceil(profile.FrameRate) * 10)
 	params.InputLookahead = mathxt.MaxUint8(params.ThreadCount*5, 30)
-	params.RCLookahead = mathxt.MinUint16(params.KeyInterval, 250)
+	params.RCLookahead = uint16(math.Ceil(profile.FrameRate) * 2)
 	params.AQStrength = aqStrength + aqStrengthModifier
 	return params
 }

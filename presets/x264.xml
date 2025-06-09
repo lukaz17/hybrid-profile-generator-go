@@ -6,7 +6,7 @@
  <HybridData name="adjustGOPSizeToOutputFPS" value="false"/>
  <HybridData name="adjustVUIColorMatrixToInput" value="true"/>
  <HybridData name="adjustVUIColorPrimesToInput" value="true"/>
- <HybridData name="adjustVUIColorRangeToInput" value="false"/>
+ <HybridData name="adjustVUIColorRangeToInput" value="true"/>
  <HybridData name="adjustVUIColorTransferToInput" value="true"/>
  <HybridData name="advancedBFrameSettings" value="true"/>
  <HybridData name="alwaysAllowP4x4" value="true"/>
@@ -31,9 +31,9 @@
  <HybridData name="chromaQpModifier" value="-3"/>
  <HybridData name="commandLineAddition"/>
  <HybridData name="constrainIntra" value="false"/>
- <HybridData name="cpuCount" value="16"/>
+ <HybridData name="cpuCount" value="1"/>
  <HybridData name="createQpFile" value="true"/>
- <HybridData name="crfMax" value="{{.RateFactorMax}}"/>
+ <HybridData name="crfMax" value="0"/>
  <HybridData name="curveCompression" value="0.6"/>
  <HybridData name="customQuantizerMatrix"/>
  <HybridData name="datarateFluctuation" value="2"/>
@@ -143,7 +143,7 @@
  <HybridData name="synclookaheadMode" value="manual"/>
  <HybridData name="targetSize" value="700"/>
  <HybridData name="targetSizeMode" value="custom"/>
- <HybridData name="threads" value="16"/>
+ <HybridData name="threads" value="{{.ThreadCount}}"/>
  <HybridData name="timeCodesFromInput" value="false"/>
  <HybridData name="timecodeOutPush" value="true"/>
  <HybridData name="trellisLabel" value="false"/>
@@ -158,14 +158,14 @@
  <HybridData name="videoUsabilityInformation" value="true"/>
  <HybridData name="vuiChromaLocation" value="false"/>
  <HybridData name="vuiChromaLocationValue" value="0"/>
- <HybridData name="vuiColorMatrix" value="false"/>
+ <HybridData name="vuiColorMatrix" value="true"/>
  <HybridData name="vuiColorMatrixValue" value="smpte170m"/>
  <HybridData name="vuiColorPrimes" value="false"/>
  <HybridData name="vuiColorPrimesValue" value="undef"/>
  <HybridData name="vuiOverscan" value="false"/>
  <HybridData name="vuiOverscanValue" value="undef"/>
  <HybridData name="vuiRange" value="true"/>
- <HybridData name="vuiRangeValue" value="full"/>
+ <HybridData name="vuiRangeValue" value="limited"/>
  <HybridData name="vuiTransfer" value="false"/>
  <HybridData name="vuiTransferValue" value="undef"/>
  <HybridData name="vuiVideoFormat" value="false"/>
