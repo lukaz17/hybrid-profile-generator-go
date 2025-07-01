@@ -19,12 +19,11 @@ const (
 
 // EncodeProfile contains minimum parameters for encoding video in HEVC.
 type EncodeProfile struct {
-	Name        string
-	Width       uint16
-	Height      uint16
-	FrameRate   float64
-	RateFactor  RateFactor
-	ThreadCount uint8
+	Name       string
+	Width      uint16
+	Height     uint16
+	FrameRate  float64
+	RateFactor RateFactor
 }
 
 // HEVCProfile contains all constraints of an HEVC Level.
