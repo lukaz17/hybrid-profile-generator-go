@@ -94,10 +94,13 @@ func main() {
 // Create EncodeParams based on EncodeProfile.
 func createSetting(profile *hevc.EncodeProfile) *EncodeParams {
 	quality := "L"
+	qualityMultiplier := float64(1)
 	if float64(profile.RateFactor) <= float64(19) {
 		quality = "H"
+		qualityMultiplier = float64(1)
 	} else if float64(profile.RateFactor) <= float64(24) {
 		quality = "M"
+		qualityMultiplier = float64(2)
 	}
 	params := &EncodeParams{
 		Name:       opx.Ternary(profile.Name != "", profile.Name, fmt.Sprintf("%dx%d@%4.2f-%s", profile.Width, profile.Height, profile.FrameRate, quality)),
@@ -107,8 +110,9 @@ func createSetting(profile *hevc.EncodeProfile) *EncodeParams {
 		RateFactor: float64(profile.RateFactor),
 	}
 	level := hevc.MinLevel(profile.Width, profile.Height, profile.FrameRate)
-	meRange, threadCount, aqStrength := factorsByResolution(profile.Width)
-	refFrame, bFrame, aqStrengthModifier := factorsByRateFactor(profile.RateFactor, profile.FrameRate)
+	meRange, minLevel, threadCount, aqStrength := factorsByResolution(profile.Width)
+	level = mathxt.MaxUint8(level, minLevel)
+	refFrame, bFrame, aqStrengthModifier := factorsByRateFactor(profile.RateFactor, profile.FrameRate*qualityMultiplier)
 
 	params.ThreadCount = threadCount
 	params.RateFactorMax = float64(profile.RateFactor) - 5
@@ -141,34 +145,40 @@ func saveSetting(template *template.Template, params *EncodeParams) {
 }
 
 // Determine the motion estimation range and AQ strength based on the video width.
-func factorsByResolution(width uint16) (meRange, threadCount uint8, aqStrength float64) {
+func factorsByResolution(width uint16) (meRange, minLevel, threadCount uint8, aqStrength float64) {
 	meRange = uint8(24)
+	minLevel = uint8(10)
 	threadCount = uint8(4)
 	aqStrength = float64(1)
 
 	if width >= (3840 * 15 / 16) {
 		meRange = uint8(57)
+		minLevel = uint8(51)
 		threadCount = uint8(32)
 		aqStrength = float64(0.5)
 	} else if width >= (2560 * 15 / 16) {
 		meRange = uint8(57)
+		minLevel = uint8(50)
 		threadCount = uint8(24)
 		aqStrength = float64(0.6)
 	} else if width >= (1920 * 7 / 8) {
 		meRange = uint8(57)
+		minLevel = uint8(40)
 		threadCount = uint8(16)
 		aqStrength = float64(0.7)
 	} else if width >= (1280 * 7 / 8) {
 		meRange = uint8(48)
+		minLevel = uint8(30)
 		threadCount = uint8(12)
 		aqStrength = float64(0.9)
 	} else {
 		meRange = uint8(32)
+		minLevel = uint8(20)
 		threadCount = uint8(8)
 		aqStrength = float64(0.9)
 	}
 
-	return meRange, threadCount, aqStrength
+	return meRange, minLevel, threadCount, aqStrength
 }
 
 // Determine the reference frame count, B-frame count, and AQ strength modifier based on the rate factor and frame rate.
