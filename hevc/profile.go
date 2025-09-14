@@ -12,9 +12,9 @@ var profiles []*HEVCProfile
 type RateFactor float64
 
 const (
-	LowQuality    RateFactor = 25.5
-	MediumQuality RateFactor = 21
-	HighQuality   RateFactor = 17
+	NormalQuality RateFactor = 25
+	HighQuality   RateFactor = 21
+	UltraQuality  RateFactor = 17
 )
 
 // EncodeProfile contains minimum parameters for encoding video in HEVC.

@@ -49,17 +49,14 @@ func main() {
 		{Width: 1280, Height: 720},
 		{Width: 1280, Height: 960},
 		{Width: 1440, Height: 1080},
-		{Width: 1920, Height: 816},
 		{Width: 1920, Height: 1080},
 		{Width: 1920, Height: 1440},
 		{Width: 2560, Height: 1440},
-		{Width: 3840, Height: 1600},
 		{Width: 3840, Height: 2160},
 	}
 	framerates := []float64{25, 30, 50, 60}
 	qualities := []hevc.RateFactor{
-		hevc.LowQuality,
-		hevc.MediumQuality,
+		hevc.NormalQuality,
 		hevc.HighQuality,
 	}
 	for _, resolution := range resolutions {
@@ -73,6 +70,24 @@ func main() {
 				}
 				profiles = append(profiles, profile)
 			}
+		}
+	}
+	// Master profiles
+	mfResolutions := []*video.Resolution{
+		{Width: 1920, Height: 1080},
+		{Width: 2560, Height: 1440},
+		{Width: 3840, Height: 2160},
+	}
+	mfFramerates := []float64{25, 30}
+	for _, resolution := range mfResolutions {
+		for _, framerate := range mfFramerates {
+			profile := &hevc.EncodeProfile{
+				Width:      resolution.Width,
+				Height:     resolution.Height,
+				FrameRate:  framerate,
+				RateFactor: hevc.UltraQuality,
+			}
+			profiles = append(profiles, profile)
 		}
 	}
 
@@ -96,10 +111,10 @@ func createSetting(profile *hevc.EncodeProfile) *EncodeParams {
 	quality := "L"
 	qualityMultiplier := float64(1)
 	if float64(profile.RateFactor) <= float64(19) {
-		quality = "H"
+		quality = "X"
 		qualityMultiplier = float64(1)
 	} else if float64(profile.RateFactor) <= float64(24) {
-		quality = "M"
+		quality = "H"
 		qualityMultiplier = float64(2)
 	}
 	params := &EncodeParams{
