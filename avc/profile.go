@@ -12,9 +12,9 @@ var profiles []*AVCProfile
 type RateFactor float64
 
 const (
-	LowQuality    RateFactor = 24
-	MediumQuality RateFactor = 20
-	HighQuality   RateFactor = 16
+	NormalQuality RateFactor = 24
+	HighQuality   RateFactor = 20
+	UltraQuality  RateFactor = 16
 )
 
 // EncodeProfile contains minimum parameters for encoding video in AVC.

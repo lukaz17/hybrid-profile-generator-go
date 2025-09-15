@@ -42,10 +42,10 @@ type EncodeParams struct {
 
 func main() {
 	profiles := []*avc.EncodeProfile{
-		{Name: "NTSC DVD", Width: 640, Height: 480, FrameRate: 30, RateFactor: avc.MediumQuality, ThreadCount: 16},
-		{Name: "PAL DVD", Width: 768, Height: 576, FrameRate: 25, RateFactor: avc.MediumQuality, ThreadCount: 16},
-		{Name: "NTSC-WIDE DVD", Width: 864, Height: 480, FrameRate: 30, RateFactor: avc.MediumQuality, ThreadCount: 16},
-		{Name: "PAL-WIDE DVD", Width: 1024, Height: 576, FrameRate: 25, RateFactor: avc.MediumQuality, ThreadCount: 16},
+		{Name: "NTSC DVD", Width: 640, Height: 480, FrameRate: 30, RateFactor: avc.UltraQuality, ThreadCount: 16},
+		{Name: "PAL DVD", Width: 768, Height: 576, FrameRate: 25, RateFactor: avc.UltraQuality, ThreadCount: 16},
+		{Name: "NTSC-WIDE DVD", Width: 864, Height: 480, FrameRate: 30, RateFactor: avc.UltraQuality, ThreadCount: 16},
+		{Name: "PAL-WIDE DVD", Width: 1024, Height: 576, FrameRate: 25, RateFactor: avc.UltraQuality, ThreadCount: 16},
 	}
 	// Generic profiles
 	resolutions := []*video.Resolution{
@@ -59,11 +59,12 @@ func main() {
 		{Width: 1920, Height: 816},
 		{Width: 1920, Height: 1080},
 		{Width: 1920, Height: 1440},
+		{Width: 2560, Height: 1440},
+		{Width: 3840, Height: 2160},
 	}
 	framerates := []float64{25, 30, 50, 60}
 	qualities := []avc.RateFactor{
-		avc.LowQuality,
-		avc.MediumQuality,
+		avc.NormalQuality,
 		avc.HighQuality,
 	}
 	for _, resolution := range resolutions {
@@ -78,6 +79,24 @@ func main() {
 				}
 				profiles = append(profiles, profile)
 			}
+		}
+	}
+	// Master profiles
+	mfResolutions := []*video.Resolution{
+		{Width: 1920, Height: 1080},
+		{Width: 2560, Height: 1440},
+		{Width: 3840, Height: 2160},
+	}
+	mfFramerates := []float64{25, 30}
+	for _, resolution := range mfResolutions {
+		for _, framerate := range mfFramerates {
+			profile := &avc.EncodeProfile{
+				Width:      resolution.Width,
+				Height:     resolution.Height,
+				FrameRate:  framerate,
+				RateFactor: avc.UltraQuality,
+			}
+			profiles = append(profiles, profile)
 		}
 	}
 
@@ -100,9 +119,9 @@ func main() {
 func createSetting(profile *avc.EncodeProfile) *EncodeParams {
 	quality := "L"
 	if float64(profile.RateFactor) <= float64(17) {
-		quality = "H"
+		quality = "X"
 	} else if float64(profile.RateFactor) <= float64(22) {
-		quality = "M"
+		quality = "H"
 	}
 	params := &EncodeParams{
 		Name:        opx.Ternary(profile.Name != "", profile.Name, fmt.Sprintf("%dx%d@%4.2f-%s", profile.Width, profile.Height, profile.FrameRate, quality)),
